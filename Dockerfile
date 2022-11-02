@@ -1,51 +1,14 @@
-#
-# This Dockerfile builds a recent curl with HTTP/2 client support, using
-# a recent nghttp2 build.
-#
-# See the Makefile for how to tag it. If Docker and that image is found, the
-# Go tests use this curl binary for integration tests.
-#
+# use a node base image
+FROM node:7-onbuild
 
-FROM alpine:latest
+# set maintainer
+LABEL maintainer "academy@release.works"
 
-RUN apk add --no-cache \
-	ca-certificates \
-	nghttp2 \
-	openssl
+# set a health check
+HEALTHCHECK --interval=5s \
+            --timeout=5s \
+            CMD curl -f http://127.0.0.1:8000 || exit 1
 
-ENV CURL_VERSION 7.70.0
+# tell docker what port to expose
+EXPOSE 8000
 
-RUN set -x \
-    && apk add --no-cache --virtual .build-deps \
-		g++ \
-		make \
-		nghttp2-dev \
-		openssl-dev \
-		perl \
-		gnupg \
-	&& wget https://curl.haxx.se/download/curl-$CURL_VERSION.tar.bz2 \
-	&& wget https://curl.haxx.se/download/curl-$CURL_VERSION.tar.bz2.asc \
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 27EDEAF22F3ABCEB50DB9A125CC908FDB71E12C2 \
-	&& gpg --verify curl-$CURL_VERSION.tar.bz2.asc \
-    && tar xjvf curl-$CURL_VERSION.tar.bz2 \
-    && rm curl-$CURL_VERSION.tar.bz2 \
-    && ( \
-		cd curl-$CURL_VERSION \
-    	&& ./configure \
-    		--with-nghttp2=/usr \
-        	--with-ssl \
-        	--enable-ipv6 \
-        	--enable-unix-sockets \
-        	--without-libidn \
-        	--disable-static \
-        	--disable-ldap \
-        	--with-pic \
-    	&& make \
-    	&& make install \
-	) \
-    && rm -r curl-$CURL_VERSION \
-    && rm -r /usr/share/man \
-    && apk del .build-deps
-
-ENTRYPOINT ["/usr/local/bin/curl"]
-CMD ["-h"]
