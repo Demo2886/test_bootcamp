@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_ID = credentials('DockerHub')
-        DOCKER_PASSWORD = credentials('jokercat2886')
+        DOCKER_PASSWORD = credentials('DockerHub')
     }
 
     stages {
