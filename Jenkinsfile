@@ -37,7 +37,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          //dockerImage = docker.build("$registry:$BUILD_NUMBER")
+          dockerImage = docker.build("$registry:$BUILD_NUMBER")
           dockerImage = docker.build("$registry:latest")
         }
       }
@@ -45,13 +45,8 @@ pipeline {
     stage('Test image') {
       steps{
         sh "docker run -p 8001:8000 -d $registry:latest"
-        sleep 4
 	sh "curl http://127.0.0.1:8001"
-	sleep 4
 	sh "docker stop $docker_stop"
-	//sh 'docker ps -f name=zookeeper -q | xargs --no-run-if-empty docker container stop'
-	//sh "ddocker ps -aq | xargs docker stop --all"
-	sleep 10
       }
     }
 
