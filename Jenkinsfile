@@ -29,25 +29,27 @@ node {
       steps{
         script {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-            def depl = true
-            try{
-              input("Deploy in prod?")
+		      input("Deploy in prod?")
+		  
+            //def depl = true
+            //    try{
+            //      input("Deploy in prod?")
+            //    }
+            //catch(err){
+            //    depl = false
+            //   }
+            //try{
+            //  if(depl){
+            //        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+            //            app.push("${env.BUILD_NUMBER}")
+            //            app.push("latest")
+            //        }
+            //    }
+            //  }
             }
-            catch(err){
-              depl = false
-            }
-            try{
-              if(depl){
-                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    }
-                }
-              }
-            }
-           // catch(Exception err){
-           //  error "Deployment filed"
-           // }
+            //catch(Exception err){
+            //  error "Deployment filed"
+            //}
           }
         }
       }
