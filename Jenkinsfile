@@ -15,23 +15,6 @@ pipeline {
       }
     }
 
-//    stage ("Lint dockerfile") {
-//        agent {
-//            docker {
-//                image 'hadolint/hadolint:latest'
-//                //label 'master'
-//            }
-//        }
-//        steps {
-//            sh 'hadolint Dockerfile | tee -a hadolint_lint.txt'
-//        }
-//        post {
-//            always {
-//                archiveArtifacts 'hadolint_lint.txt'
-//            }
-//        }
-//    }
-
     stage('Building image') {
       steps{
         script {
@@ -55,60 +38,5 @@ pipeline {
         }
       }
     }
-	
-//	
-//    stage('Deploy in pre-prod') {
-//      steps{
-//        withKubeConfig([credentialsId: 'kubernetes_f']) {
-//        sh 'kubectl get namespace | grep -q "^pre-prod " || kubectl create namespace pre-prod'
-//        sh 'kubectl apply -f jenk21.yaml --namespace=pre-prod'
-//        sleep 4
-//        sh 'kubectl get pods --namespace=pre=prod'
-//        }
-//      }
-//    }
-
-
-//    stage('Deploy in prod') {
-//      steps{
-//        script {
-//          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-//            def depl = true
-//            try{
-//              input("Deploy in prod?")
-//            }
-//            catch(err){
-//              depl = false
-//            }
-//            try{
-//              if(depl){
-//              withKubeConfig([credentialsId: 'kubernetes_f']) {
-//                sh 'kubectl get namespace | grep -q "^prod " || kubectl create namespace prod'
-//                sh 'kubectl apply -f jenk21.yaml'
-//                sleep 4
-//                sh 'kubectl get pods --namespace=prod'
-//                sh 'kubectl delete -f jenk21.yaml --namespace=pre-prod'
-//                sh 'kubectl delete namespace pre-prod'
-//              }
-//              }
-//            }
-//            catch(Exception err){
-//              error "Deployment filed"
-//            }
-//          }
-//        }
-//      }
-//    }
-
-  }
-  
-  
-//  post {
-//    success {
-//      slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//    }
-//    failure {
-//      slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//    }
-//  }
+  }	
 }
