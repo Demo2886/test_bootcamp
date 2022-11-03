@@ -25,7 +25,7 @@ node {
 
     stage("Push image in repo?") {
      	script {
-     	    Boolean userInput = input(id: 'Proceed1', message: 'Promote build?')
+     	    Boolean userInput = input(id: 'KO!', message: 'Promote build?')
             echo 'userInput: ' + userInput
 
 	if(userInput == true) {
