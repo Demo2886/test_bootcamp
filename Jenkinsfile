@@ -2,6 +2,7 @@ pipeline {
     environment {
     registry = "jokercat2886/test-jenkins"
     registryCredential = 'DockerHub'
+    docker_stop = '\$(docker ps -a -q)'
   }
   
   
@@ -47,7 +48,8 @@ pipeline {
         sleep 4
 	sh "curl http://127.0.0.1:8001"
 	sleep 4
-	sh 'docker ps -f name=zookeeper -q | xargs --no-run-if-empty docker container stop'
+	sh "docker stop $docker_stop"
+	//sh 'docker ps -f name=zookeeper -q | xargs --no-run-if-empty docker container stop'
 	//sh "ddocker ps -aq | xargs docker stop --all"
 	sleep 10
       }
