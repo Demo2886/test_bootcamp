@@ -45,9 +45,9 @@ node {
                 }
               }
             }
-            catch(Exception err){
-              error "Deployment filed"
-            }
+           // catch(Exception err){
+           //  error "Deployment filed"
+           // }
           }
         }
       }
