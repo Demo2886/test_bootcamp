@@ -24,22 +24,32 @@ node {
     }
 
 
+    parameters {
+        booleanParam(name: 'BUILD', defaultValue: true, description: 'do you want to build the app?')
+    }
+    stages {
+        stage('Push image in repo?') {
+            steps {
+                echo "${params.BUILD}"
+            }
+        }
+    }
 
-    stage("Push image in repo?") {
-     				script {
-					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?')
-						echo 'userInput: ' + userInput
 
-					if(userInput == true) {
-						// do action
-					} else {
-						// not do action
-                   			 echo "Action was aborted."
-					}
-                           
-					}
-
-        }
+//    stage("Push image in repo?") {
+//     				script {
+//					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?')
+//						echo 'userInput: ' + userInput
+//
+//					if(userInput == true) {
+//						// do action
+//					} else {
+//						// not do action
+//                 			 echo "Action was aborted."
+//				}
+//                 
+//					}
+//        }
         
         
         
