@@ -3,7 +3,7 @@ import socket
 
 # Define socket host and port
 SERVER_HOST = '0.0.0.0'
-SERVER_PORT = 8090
+SERVER_PORT = 8000
 
 # Create socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

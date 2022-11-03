@@ -10,5 +10,5 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 RUN mkdir ./app
 WORKDIR ./app
 COPY ./app/* .
-EXPOSE 8090
+EXPOSE 8000
 CMD ["python3", "listener.py"]
