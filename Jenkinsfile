@@ -26,15 +26,20 @@ node {
 
 
     stage("Push image in repo?") {
- 
-         script {
-               def params = input message: 'Push image in repo?',
-                                  parameters: [choice(name: 'OK', choices: 'OK',description: 'YES'),
-                                               booleanParam(name: 'NO', defaultValue: true, description: 'NO')]
-        echo params['OK']
-        echo params['NO']
-                }
-            
+     
+    
+				script {
+					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
+						echo 'userInput: ' + userInput
+
+					if(userInput == true) {
+						// do action
+					} else {
+						// not do action
+                   			 echo "Action was aborted."
+					}
+                           
+					}
  
  
  //                app.script {
