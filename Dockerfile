@@ -1,14 +1,14 @@
-# use a node base image
 FROM alpine:latest
 
-# set maintainer
-LABEL maintainer "academy@release.works"
+MAINTAINER Alexandr_Nefedzin
 
-# set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
 
-# tell docker what port to expose
-EXPOSE 8000
-
+RUN mkdir ./app
+WORKDIR ./app
+COPY ./app/* .
+EXPOSE 8090
+CMD ["python3", "listener.py"]
