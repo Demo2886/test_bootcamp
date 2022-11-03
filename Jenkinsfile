@@ -26,11 +26,22 @@ node {
 
 
     stage("Push image in repo?") {
-                 app.script {
-                    env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
-                            parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
+ 
+         script {
+               def params = input message: 'Message',
+                                  parameters: [choice(name: 'OK', choices: ['1', '2', '3', '4', '5'],description: 'description'),
+                                               booleanParam(name: 'NO', defaultValue: true, description: 'description')]
+        echo params['OK']
+        echo params['NO']
                 }
-                echo "${env.RELEASE_SCOPE}"
+            
+ 
+ 
+ //                app.script {
+ //                   env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
+ //                           parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
+ //               }
+ //               echo "${env.RELEASE_SCOPE}"
         }
         
         
