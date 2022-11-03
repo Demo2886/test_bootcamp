@@ -47,7 +47,7 @@ pipeline {
         sleep 4
 	sh "curl http://127.0.0.1:8001"
 	sleep 4
-	sh "ddocker ps -aq | xargs docker stop"
+	sh "ddocker ps -aq | xargs docker stop --all"
 	sleep 10
       }
     }
