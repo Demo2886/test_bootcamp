@@ -28,7 +28,7 @@ node {
      stage('Deploy in prod') {
       steps{
         script {
-          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+          //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
 		      input("Deploy in prod?")
 		  
             //def depl = true
