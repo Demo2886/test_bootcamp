@@ -46,7 +46,7 @@ node {
             //        }
             //    }
             //  }
-            }
+            //}
             //catch(Exception err){
             //  error "Deployment filed"
             //}
