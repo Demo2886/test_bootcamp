@@ -3,11 +3,15 @@ pipeline {
     registry = "jokercat2886/test-jenkins"
     registryCredential = 'DockerHub'
   }
+  
+  
       agent any //{label 'master'}
   stages {
+    
+    
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/Demo2886/java_cicd'
+        git url:'https://github.com/Demo2886/test_bootcamp.git', branch:'main'
       }
     }
 
@@ -63,6 +67,8 @@ pipeline {
 //        }
 //      }
 //    }
+
+
 //    stage('Deploy in prod') {
 //      steps{
 //        script {
@@ -93,7 +99,10 @@ pipeline {
 //        }
 //      }
 //    }
-//  }
+
+  }
+  
+  
 //  post {
 //    success {
 //      slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
