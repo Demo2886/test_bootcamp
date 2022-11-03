@@ -24,7 +24,7 @@ node {
     }
 
 
-    stages {
+
         stage('Стоит продолжать?') {
             input {
                 message "Should we continue?"
@@ -38,7 +38,7 @@ node {
                 echo "Hello, ${PERSON}, nice to meet you."
             }
         }
-    }
+    
 
 
     stage('Push image') {
