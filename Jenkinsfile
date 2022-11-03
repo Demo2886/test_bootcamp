@@ -26,6 +26,8 @@ pipeline {
     stage('Test image') {
       steps{
         sh "docker run -i $registry:latest"
+	sleep 4
+	sh curl http://127.0.0.1:8001
       }
     }
 
