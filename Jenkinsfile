@@ -26,10 +26,8 @@ node {
 
 
     stage("Push image in repo?") {
-     
-    
-				script {
-					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
+     				script {
+					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: 'NO', name: 'Please confirm you agree with this']])
 						echo 'userInput: ' + userInput
 
 					if(userInput == true) {
@@ -40,13 +38,7 @@ node {
 					}
                            
 					}
- 
- 
- //                app.script {
- //                   env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
- //                           parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
- //               }
- //               echo "${env.RELEASE_SCOPE}"
+
         }
         
         
