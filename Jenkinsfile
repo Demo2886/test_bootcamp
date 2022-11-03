@@ -27,7 +27,7 @@ node {
 
     stage("Push image in repo?") {
      				script {
-					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: 'NO', name: 'Please confirm you agree with this']])
+					Boolean userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
 						echo 'userInput: ' + userInput
 
 					if(userInput == true) {
