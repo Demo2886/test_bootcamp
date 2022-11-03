@@ -28,9 +28,9 @@ node {
     stage("Push image in repo?") {
  
          script {
-               def params = input message: 'Message',
-                                  parameters: [choice(name: 'OK', choices: ['1', '2', '3', '4', '5'],description: 'description'),
-                                               booleanParam(name: 'NO', defaultValue: true, description: 'description')]
+               def params = input message: 'Push image in repo?',
+                                  parameters: [choice(name: 'OK', choices: 'OK',description: 'YES'),
+                                               booleanParam(name: 'NO', defaultValue: true, description: 'NO')]
         echo params['OK']
         echo params['NO']
                 }
