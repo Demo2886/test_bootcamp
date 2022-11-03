@@ -45,11 +45,8 @@ pipeline {
     stage('Test image') {
       steps{
         sh "docker run -p 8001:8000 -d $registry:latest"
-	
 	sh "docker run -p 8002:8003 -d $registry:$BUILD_NUMBER"
-	
 	sh "curl http://127.0.0.1:8001"
-	
 	sh "docker stop $docker_stop"
       }
     }
