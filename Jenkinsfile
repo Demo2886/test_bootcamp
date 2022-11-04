@@ -17,21 +17,19 @@ pipeline {
     }
     
   
-    stage ("lint dockerfile") {
-        agent {
-            docker {
-                image 'hadolint/hadolint:latest-debian'
-                //image 'ghcr.io/hadolint/hadolint:latest-debian'
-            }
+    stage("Test Dockerfile with linter") {
+      steps {
+        script {
+          try {
+          echo "Linting Dockerfile..."
+          sh 'hadolint --ignore DL3018 --ignore DL3013 --ignore DL3019 --ignore DL4003 Dockerfile > lint_report.txt'
+          archiveArtifacts artifacts: 'lint_report.txt'
+          } catch (Exception err) {
+            dockerImage.dockerfile_lint = "Linting failure"
+            error "Something wrong with Dockerfile"
+          }
         }
-        steps {
-            sh 'hadolint Dockerfile/* | tee -a hadolint_lint.txt'
-        }
-        post {
-            always {
-                archiveArtifacts 'hadolint_lint.txt'
-            }
-        }
+      }
     }
 
     stage('Building image') {
