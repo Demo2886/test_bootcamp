@@ -102,7 +102,7 @@ node {
         
     
         stage('Deploy in prod') {
-          steps{
+          
             script {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                 def depl = true
@@ -129,7 +129,7 @@ node {
                 }
               }
             }
-          }
+          
         }
 		
 	    
