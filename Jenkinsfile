@@ -81,7 +81,7 @@ pipeline {
 //   ================================================================================================= 
 //      k8s
 
-
+node {
         stage('Apply Kubernetes files') {
           withKubeConfig([credentialsId: 'kubernetes']) {
     	    sh 'kubectl get namespace | grep -q "^pre-prod " || kubectl create namespace pre-prod'
@@ -122,7 +122,7 @@ pipeline {
             }
           }
         }
-
+    }
 
 
     
