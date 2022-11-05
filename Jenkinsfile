@@ -96,7 +96,7 @@ node {
     	    sh 'kubectl get namespace | grep -q "^pre-prod " || kubectl create namespace pre-prod'
     		sh 'kubectl apply -f k8s_bom.yaml --namespace=pre-prod'
     		sleep 4
-            sh 'kubectl get pods --namespace=pre=prod'
+            sh 'kubectl get pods --namespace=pre-prod'
           }
         }
         
