@@ -43,7 +43,7 @@ node {
 
 
     stage('Building image') {
-        steps{
+        step{
             script {
                 dockerImage = docker.build("$registry:$BUILD_NUMBER")
                 dockerImage = docker.build("$registry:latest")
